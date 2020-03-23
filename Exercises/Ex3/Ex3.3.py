@@ -1,3 +1,4 @@
+# pylint: disable=unused-wildcard-import
 import netgen.gui
 from ngsolve import *
 import netgen.geom2d as geom2dim
