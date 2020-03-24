@@ -1,14 +1,17 @@
+# pylint: disable=unused-wildcard-import
+#### MODULES #####
 import netgen.gui
 from ngsolve import *
 import netgen.geom2d as geom2dim
 import matplotlib.pyplot as plt
 import numpy as np
 
+#### CODE ####
 go = 'y'
 while(go == 'y'):
     # Setup the mesh
     default = input("Use default settings (h=0.1,k=3)? (y/n): ")
-    if default == 'y' or temp == 'Y':
+    if default == 'y' or default == 'Y':
         h = 0.1e-1
         k = 3
     else:
@@ -17,7 +20,7 @@ while(go == 'y'):
 
     geo = geom2dim.SplineGeometry()
 
-    geo.AddRectangle((0,0), (1,1), bcs=['b','r','t','l'], leftdomain=1)
+    geo.AddRectangle((0,0), (1,1), bcs=['b','r','t','l'], leftdomain=1, rightdomain=0)
     geo.AddRectangle((0.3,0.5), (0.5,0.7), bcs=['b1','r1','t1','l1'], leftdomain=2, rightdomain=1)
     geo.SetMaterial(1, "d2")
     geo.SetMaterial(2, "d1")

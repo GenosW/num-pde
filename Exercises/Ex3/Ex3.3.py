@@ -1,11 +1,12 @@
 # pylint: disable=unused-wildcard-import
+#### MODULES #####
 import netgen.gui
 from ngsolve import *
 import netgen.geom2d as geom2dim
 import matplotlib.pyplot as plt
 import numpy as np
 
-
+#### CODE ####
 # Setup the mesh
 default = input("Use default settings (h=0.1,k=3)? (y/n): ")
 if default == 'y' or default == 'Y':
@@ -38,8 +39,8 @@ fes = H1(mesh, order=k, dirichlet='r|l')
 u, v = fes.TnT()
 
 # Set right hand side
-f = LinearForm(fes)
-f += x*v*dx
+rhs = LinearForm(fes)
+rhs += x*v*dx
 
 # The bilinear form
 A = BilinearForm(fes, symmetric=True)
@@ -53,7 +54,7 @@ with TaskManager():
 ###### Calculations #######
 # Calculate the solution field (function)
 gf = GridFunction(fes)
-gf.vec.data = A.mat.Inverse(fes.FreeDofs(), inverse='sparsecholesky') * f.vec
+gf.vec.data = A.mat.Inverse(fes.FreeDofs(), inverse='sparsecholesky') * rhs.vec
 
 ###### Draw final soltion ########
 Draw(gf, mesh, 'grid_function')
@@ -70,7 +71,7 @@ if temp == 'y' or temp == 'Y':
     wr.Set(x)
     wl.Set(1-x)
 
-    print("---- Option 1 ----")
+    print("---- Option 1 (Integration) ----")
     Wr = Integrate( grad(gf)*grad(wr) - x*wr, mesh)
     Wl = Integrate( grad(gf)*grad(wl) - x*wl, mesh)
     Wtot = Wl + Wr
@@ -82,9 +83,9 @@ if temp == 'y' or temp == 'Y':
     input("Go on?")
     # Option 2
     print()
-    print("---- Option 1 ----")
+    print("---- Option 2 (Inner products) ----")
     vector = gf.vec.CreateVector()
-    vector.data = A.mat*vector - f.vec
+    vector.data = A.mat*vector - rhs.vec
 
     Wr2 = InnerProduct(vector, wr.vec)
     Wl2 = InnerProduct(vector, wl.vec)
@@ -95,3 +96,9 @@ if temp == 'y' or temp == 'Y':
 
     # Output to console
     print("2.) Total flux= ", Wtot2)
+
+# ------------------------------- #
+
+
+
+print("Stay home...stay healthy!")
