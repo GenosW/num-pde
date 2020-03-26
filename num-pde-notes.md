@@ -38,6 +38,14 @@ export DYLD_FRAMEWORK_PATH=$DYLD_FRAMEWORK_PATH:$NETGENDIR/../Frameworks
 export PATH=$NETGENDIR:$PATH
 ```
 
+## Windows
+
+Cmder alias: 
+
+```bash
+alias A-pde=D:\Studium\Code\num-pde\.env\Scripts\activate $T cd D:\Studium\Code\num-pde
+```
+
 [Similiar issue/solution](https://ngsolve.org/forum/ngspy-forum/163-macos-installation-frameworks-path-missing-at-ngsolve-6-2-1804-dmg)
 
 ## 1. Lecture
