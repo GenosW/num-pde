@@ -1,0 +1,64 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[left=2.5cm,right=2cm, bottom=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{color}
+\usepackage{abstract}
+\usepackage{float}
+\usepackage[toc,page]{appendix}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\today}
+\lhead{\bfseries Alexander Leitner 01525882}
+\rfoot{}
+
+
+
+\begin{document}
+\begin{center}
+    \fontsize{24pt}{10pt}\selectfont
+    \textsc{\textbf{NUMPDE Exercise 6}}
+\end{center}
+\section{Example 6.1}
+Proof that:
+\begin{align*}
+Q_T(v) = \int_T v\,dx\,\,\,\, \forall v \in \mathbb{P}^2(T)
+\end{align*}
+Forst we difin a $\hat{v}(\hat{x},\hat{y})$ Element and integrat over it. 
+\begin{align*}
+\hat{v}(\hat{x},\hat{y}) = c_0+c_1\hat{x}+c_2\hat{y}+c_3\hat{x}^2+c_4\hat{y}^2+c_5\hat{x}\hat{y}
+\end{align*}
+\begin{align*}
+\int_{\hat{x}=0}^1\int_{\hat{y}=0}^{1-\hat{x}}\hat{v}d\hat{x} = \frac{c_0}{2}+\frac{c_1+c_2}{6}+\frac{c_3+c_4}{12}+\frac{c_5}{24}
+\end{align*}
+Now we kan use the midpoint rule to calculate the area $\in V$.
+\begin{align*}
+Q_{\hat{T}}(v) := \frac{|\hat{T}|}{3}\big[v(\hat{x}_1)v(\hat{x}_2)v(\hat{x}_3)\big]
+\end{align*}
+Also the are of $|\hat{T}| = \frac{1}{2}|T|$ and $\hat{v}(\hat{x_1}) = c_0+\frac{c_1}{2}+\frac{c_3}{4}$,
+$\hat{v}(\hat{x_2}) =c_0+\frac{c_1}{2}+\frac{c_3}{4}$,
+$\hat{v}(\hat{x_3}) = c_0+\frac{c_1}{2}+\frac{c_2}{2}+\frac{c_3}{4}+\frac{c_4}{4}+\frac{c_5}{4}$\\
+$Q_{\hat{T}}(\hat{v}) = \frac{c_0}{2}+\frac{c_1+c_2}{6}+\frac{c_3+c_4}{12}+\frac{c_5}{24}$\\
+We sowed finally that $Q_{\hat{T}}(\hat{v}) = \int_{\hat{T}}\hat{v}$ and we know that lagrange FR are equivalent. We define $F: \hat{T} \to T$ as an affine linear mapping.
+\begin{align*}
+\int_{T}v(x)\, dx  = \int_T\hat{v}\, \circ\, F^{-1}(x)\,dx = \int_{\hat{T}}\Big(\hat{v}\,\circ F^{-1}\Big)\circ\,F(\hat{x})|\det DF|\,d\hat{x}=|\det DF|\int_{\hat{T}}\hat{v}(\hat{x})\,d\hat{x}
+\end{align*}
+At last we only have to show that $\int_{\hat{T}}\hat{v}(\hat{x})\,d\hat{x} = Q_{\hat{T}(\hat{v})}$
+\begin{align*}
+|\det DF|Q_{\hat{T}(\hat{v})} = |\det DF|\frac{|\hat{T}|}{3}\Big(\hat{v}(\hat{x_1})+\hat{v}(\hat{x_2})+\hat{v}(\hat{x_3})\Big)\\ =
+\frac{|\hat{T}|}{3} \Bigg((v\circ F)(F^{-1}(x_1))+(v\circ F)(F^{-1}(x_2))+(v\circ F)(F^{-1}(x_3))\Bigg) = \frac{|\hat{T}|}{3}\Big(v(x_1)+v(x_2)+v(x_3)\Big)
+\end{align*}
+\section{Example 6.2}
+\section{Example 6.3}
+\section{Example 6.4}
+
+\end{document}
