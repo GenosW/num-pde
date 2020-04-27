@@ -58,6 +58,29 @@ At last we only have to show that $\int_{\hat{T}}\hat{v}(\hat{x})\,d\hat{x} = Q_
 \frac{|\hat{T}|}{3} \Bigg((v\circ F)(F^{-1}(x_1))+(v\circ F)(F^{-1}(x_2))+(v\circ F)(F^{-1}(x_3))\Bigg) = \frac{|\hat{T}|}{3}\Big(v(x_1)+v(x_2)+v(x_3)\Big)
 \end{align*}
 \section{Example 6.2}
+This proof stats with Theorem 69 and we start with where $Q_h(v) = \sum_{T \in \mathbb{T}}Q_T(v) =\sum_{T \in \mathbb{T}} \int_{T}v \, dx$:
+\begin{align*}
+||\int_{\Omega} v \, dx -Q_h(v)||_{L_2(T)} = \sum_{T \in \mathbb{T}}||\int(id-I_T)v_T\, dx ||^2_{L_2(T)} 
+\end{align*}
+Now using (4.2)
+\begin{align*}
+\sum_{T \in \mathbb{T}}\det(B)||\int(id-I_T)v_T\,dx||^2_{L_2(\hat{T})}
+\end{align*}
+and after the transformation to the reference triangle:
+\begin{align*}
+\sum_{T \in \mathbb{T}}\det(B)||\int \det(B)(id-I_{\hat{T}})(v_T\,\circ\,F_T)\,d\hat{x}||^2_{L_2(\hat{T})}
+\end{align*}
+After that we apply the Bramble Hilbert lemma. The Quatrature rule is exact for polynominals for decreas 2 as we seen in 6.1 $\Rightarrow \int(id-I_{\hat{T}})q\,dx = 0$ for $q \in \mathbb{P}^2(\hat{T})$
+\begin{align*}
+||\int_{\Omega} v \, dx -Q_h(v)||_{L_2(T)} \leq \sum_{T \in \mathbb{T}} \det(B)|v_T\,\circ\,F_T|^2_{H^3(\hat{T})}
+\end{align*}
+\begin{align*}
+\preceq \sum_{T \in \mathbb{T}}\det(B)\det(B)^{-1}||B||^6|v_T|^2_{H^3(T)}
+\end{align*}
+In the end we use the quasi-uniform $||B||^6 \backsimeq h^6$ propperty:
+\begin{align*}
+||\int_{\Omega}v\,dx-Q_h(v)||_{L_2(\Omega)}\preceq h^3||v_T||_{H^3(\Omega)}
+\end{align*}
 \section{Example 6.3}
 \section{Example 6.4}
 
