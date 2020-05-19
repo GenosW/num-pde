@@ -3,14 +3,14 @@ from netgen.geom2d import unit_square
 from ngsolve import *
 from ngsolve import internal
 import netgen.gui
-from IPython import display
+#from IPython import display
 import matplotlib.pyplot as plt
 #%matplotlib inline
 #internal.visoptions.autoscale = False
 
-mesh = Mesh(unit_square.GenerateMesh(maxh=0.1))
-print(mesh.GetBoundaries())
-Draw(mesh)
+# mesh = Mesh(unit_square.GenerateMesh(maxh=0.1))
+# #print(mesh.GetBoundaries())
+# Draw(mesh)
 
 # Some constants and functions
 f = 1
@@ -25,8 +25,6 @@ Robin = "top|right"
 
 # Runtimes
 runtimes = {"primal": -1, "mixed": -1}
-
-
 
 def primal(mesh, order=2, draw=False, rt=False):
     FESp = H1(mesh, order=order, dirichlet=Dirichlet)
@@ -149,24 +147,26 @@ def compare_PvM(h_list=hs, order=2, ask=True):
         #internal.visoptions.autoscale = False
         if ask:
             if not (hnext == "None"):
-                stop = input(f"Next h={hnext}\nStop? (y/n): ")
-            else:
-                stop = 'y'
+                print(f"Next h={hnext}")
+            stop = input("Stop? (y/n): ")
             if stop == 'y':
                 break
     return errors_u, errors_flux
 
-if __name__ == "__main__":
-    hs = [0.5, 0.2, 0.1, 0.08, 0.05, 0.025, 0.01]
-    
-    fig = plt.figure(figsize=(10,8))
-    orders = [1,2,3]
-    for order in orders:
-        print(f"Order= {order}")
-        errors_u, errors_flux = compare_PvM(h_list=hs, order=1, ask=False)
-        hs_used = hs[0:int(len(errors_u))]
-        fig.semilogy(hs_used, errors_u, label=f"err(u)_o={order}")
-        fig.semilogy(hs_used, errors_flux, label=f"err(flux)_o={order}")
-    plt.grid()
-    plt.legend()
-    plt.savefig(f"D:/Studium/Code/num-pde/Exercises/Ex9/Peter/Ex9.3_O=[{orders[0]-orders[-1]}].png")
+
+hs = [0.5, 0.2, 0.1, 0.08, 0.05, 0.025, 0.01]
+
+fig = plt.figure(figsize=(10,8))
+orders = [1,2,3]
+styles = ["x", "o", "s"]
+for order, style in zip(orders, styles):
+    print(f"Order= {order}")
+    errors_u, errors_flux = compare_PvM(h_list=hs, order=order, ask=True)
+    hs_used = hs[0:int(len(errors_u))]
+    plt.semilogy(hs_used, errors_u, "-"+style, label=f"err(u)_o={order}")
+    plt.semilogy(hs_used, errors_flux, "--"+style, label=f"err(flux)_o={order}")
+plt.grid()
+plt.legend()
+pic = f"D:/Studium/Code/num-pde/Exercises/Ex9/Peter/Ex9.3_O=[{orders[0]}-{orders[-1]}].png"
+plt.savefig(pic)
+print(f"Saved plot at {pic}")
